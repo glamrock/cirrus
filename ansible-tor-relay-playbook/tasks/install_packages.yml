@@ -1,0 +1,44 @@
+---
+
+- name: setup NodeJS GPG keys
+  apt_key: keyserver=keys.mayfirst.org id={{ item }}
+  with_items: nodejs_gpg_keys
+  tags:
+    - install
+    - gpg
+
+- name: setup Tor build GPG keys
+  apt_key: keyserver=keys.mayfirst.org id={{ item }}
+  with_items: tor_build_gpg_keys
+  tags:
+    - install
+    - gpg
+
+- name: setup Tor development GPG keys
+  apt_key: keyserver=keys.mayfirst.org id={{ item }}
+  with_items: tor_development_gpg_keys
+  tags:
+    - install
+    - gpg
+
+- name: setup tor apt repo
+  apt_repository: >
+    repo='deb http://deb.torproject.org/torproject.org {{ ansible_lsb.codename }} main'
+    state=present
+    update_cache=yes
+  tags:
+    - install
+    - packages
+
+- name: install needed packages
+  apt: >
+    name={{ item }}
+    state=latest
+    update_cache=yes
+  with_items:
+    - deb.torproject.org-keyring
+    - tor
+    - gnupg
+  tags:
+    - install
+    - packages

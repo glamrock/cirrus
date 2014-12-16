@@ -1,0 +1,36 @@
+# Log basic notices
+Log notice file /var/log/tor/notices.log
+
+# Run in the background
+RunAsDaemon 1
+
+# Where to store keys
+DataDirectory /var/lib/tor
+
+# Required: what port to advertise for incoming Tor connections.
+ORPort 9001
+
+Nickname {{ ansible_fqdn | regex_replace('[-\.]','0') }}
+
+# Cap bandwidth
+RelayBandwidthRate 2500 KB
+RelayBandwidthBurst 3000 KB
+
+#This is on a monthly basis
+AccountingMax 200 GB
+
+# This should be set to day/time initially run, with "month" indicating monthly accounting
+AccountingStart month 3 15:00
+
+ContactInfo 0xB3C79A63 Saint <cirrus@cryptic.be>
+
+# Mirror directory information on this port
+DirPort 9030
+
+# This is set to keep users from occupying more than one node in a 3-node circuit
+MyFamily Cirrus
+
+# No exits allowed
+ExitPolicy reject *:*
+
+# config changed
