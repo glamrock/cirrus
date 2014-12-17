@@ -1,10 +1,4 @@
-Tor Bridges and Relays
-======================
-
-
-
-
-
+# Tor Bridges and Relays
 
 ### Relay Ansible Playbook
 To test it, add your hosts to the `hosts` file and run:
@@ -13,4 +7,8 @@ To test it, add your hosts to the `hosts` file and run:
 
 ### Bridge Ansible Playbook
 In progress.
+
+## Thanks
+With special thanks to Vasiliy Kaygorodov for creating the first relay playbook.
+
 
